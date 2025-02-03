@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Poliza{% endblock %}
+
+{% block body %}
+    <h1>Create new Poliza</h1>
+
+    {{ include('poliza/_form.html.twig') }}
+
+    <a href="{{ path('app_poliza_index') }}">back to list</a>
+{% endblock %}

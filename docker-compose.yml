@@ -1,0 +1,52 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: proyecto_segurarse_app
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www/html
+    environment:
+      - APP_ENV=dev
+      - DATABASE_URL=mysql://root:root@mysql:3306/segurarse_db
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: proyecto_segurarse_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=segurarse_db
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./proyecto-segurarse-front
+      dockerfile: Dockerfile
+    container_name: proyecto_segurarse_frontend
+    ports:
+      - "81:3000"
+    volumes:
+      - ./proyecto-segurarse-front:/app
+      - /app/node_modules
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cliente{% endblock %}
+
+{% block body %}
+    <h1>Cliente</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cliente.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ cliente.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido</th>
+                <td>{{ cliente.apellido }}</td>
+            </tr>
+            <tr>
+                <th>Dni</th>
+                <td>{{ cliente.dni }}</td>
+            </tr>
+            <tr>
+                <th>FechaNacimiento</th>
+                <td>{{ cliente.fechaNacimiento ? cliente.fechaNacimiento|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cliente_index') }}">back to list</a>
+
+    <a href="{{ path('app_cliente_edit', {'id': cliente.id}) }}">edit</a>
+
+    {{ include('cliente/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Poliza index{% endblock %}
+
+{% block body %}
+    <h1>Poliza index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Auto</th>
+                <th>Costo</th>
+                <th>FechaVigencia</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for poliza in polizas %}
+            <tr>
+                <td>{{ poliza.id }}</td>
+                <td>{{ poliza.auto }}</td>
+                <td>{{ poliza.costo }}</td>
+                <td>{{ poliza.fechaVigencia ? poliza.fechaVigencia|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_poliza_show', {'id': poliza.id}) }}">show</a>
+                    <a href="{{ path('app_poliza_edit', {'id': poliza.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_poliza_new') }}">Create new</a>
+{% endblock %}
