@@ -124,9 +124,6 @@ final class ClienteController extends AbstractController
         return new JsonResponse(['message' => 'Cliente eliminado correctamente'], 200);
     }
 
-    /**
-     * Valida el cliente contra la API externa.
-     */
     private function validarClienteExterno(string $authHeader, string $nombre, string $apellido): string
     {
         $url = "https://qa.segurarse.com.ar/pruebas/testencrypt";
@@ -154,12 +151,8 @@ final class ClienteController extends AbstractController
         return isset($responseData['result']) && $responseData['result'] === "OK" ? "OK" : "ERROR";
     }
 
-    /**
-     * Verifica si la solicitud es JSON.
-     */
     private function isJsonRequest(Request $request): bool
     {
         return $request->headers->get('Content-Type') === 'application/json';
-        // return str_contains($request->headers->get('Content-Type'), 'application/json');
     }
 }

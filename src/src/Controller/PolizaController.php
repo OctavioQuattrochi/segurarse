@@ -96,9 +96,6 @@ final class PolizaController extends AbstractController
         return new JsonResponse(['message' => 'Póliza eliminada correctamente'], 200);
     }
 
-    /**
-     * Verifica si la solicitud es JSON.
-     */
     private function isJsonRequest(Request $request): bool
     {
         return str_contains($request->headers->get('Content-Type'), 'application/json');

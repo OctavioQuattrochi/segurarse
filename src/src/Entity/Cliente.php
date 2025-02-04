@@ -143,7 +143,7 @@ class Cliente
     public function removePoliza(Poliza $poliza): static
     {
         if ($this->polizas->removeElement($poliza)) {
-            // set the owning side to null (unless already changed)
+            
             if ($poliza->getCliente() === $this) {
                 $poliza->setCliente(null);
             }
